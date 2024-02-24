@@ -21,14 +21,14 @@ const iconPath = extractDomain(Astro.url) + (!icon?.startsWith("/") ? "/" : "") 
 ---
 
 <div
-  class="flex min-w-fit cursor-default flex-col flex-wrap items-center rounded-lg p-8 lg:min-h-32 lg:flex-row lg:flex-nowrap"
+  class="flex min-w-6 cursor-default flex-col flex-wrap items-center rounded-lg p-4 lg:min-h-24 lg:flex-row lg:flex-nowrap lg:px-8 lg:py-6"
   style={`background-color: ${color}`}
 >
   <div class="flex">
-    <Image src={`${iconPath}`} alt="Icon" height={128} width={128} class="max-h-20 max-w-20" />
+    <Image src={`${iconPath}`} alt="Icon" height={128} width={128} class="max-h-12 max-w-12 lg:max-h-20 lg:max-w-20" />
   </div>
   <div class="mt-4 flex w-full lg:mt-0">
-    <h2 class="w-full text-center text-4xl font-medium text-slate-100">
+    <h2 class="text-md w-full text-center font-medium text-slate-100 lg:text-3xl">
       {name}
     </h2>
   </div>
