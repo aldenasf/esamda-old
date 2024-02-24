@@ -18,9 +18,11 @@
   // Function to close all dropdowns
   function closeAllDropdowns() {
     navbarDropdownBtn.forEach((dropdown) => {
-      const dropdownTarget = dropdown.querySelector("ul");
-      dropdownTarget?.classList.add("hidden");
-      dropdownTarget?.classList.remove("flex");
+      const dropdownContent = dropdown.querySelector("ul");
+      const dropdownArrow = dropdown.querySelector("p > svg");
+      dropdownContent?.classList.add("hidden");
+      dropdownContent?.classList.remove("flex");
+      dropdownArrow?.classList.remove("rotate-180");
     });
   }
 
@@ -37,19 +39,21 @@
   });
 
   navbarDropdownBtn.forEach((el) => {
-    const target = el.querySelector("ul");
+    const dropdownContent = el.querySelector("ul");
+    const dropdownArrow = el.querySelector("p > svg");
 
     el?.querySelector("p")?.addEventListener("click", (event) => {
       // Check if the clicked dropdown is already open
-      const isOpen = target?.classList.contains("flex");
+      const isOpen = dropdownContent?.classList.contains("flex");
 
       // Close all dropdowns
       closeAllDropdowns();
 
       if (!isOpen) {
         // Toggle the selected dropdown
-        target?.classList.toggle("hidden");
-        target?.classList.toggle("flex");
+        dropdownContent?.classList.toggle("hidden");
+        dropdownContent?.classList.toggle("flex");
+        dropdownArrow?.classList.toggle("rotate-180");
 
         // Prevent the document click event from closing this dropdown immediately
         event.stopPropagation();
