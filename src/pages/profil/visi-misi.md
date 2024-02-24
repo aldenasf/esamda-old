@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/Article.astro"
+layout: "../../layouts/MarkdownArticle.astro"
 title: "Visi & Misi"
 ---
 

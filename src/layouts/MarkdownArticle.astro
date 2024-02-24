@@ -1,0 +1,9 @@
+---
+import ArticleLayout from "./Article.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<ArticleLayout bannerTitle={frontmatter.title}>
+  <slot />
+</ArticleLayout>

@@ -1,7 +1,5 @@
 ---
-import Layout from "../../layouts/Blank.astro";
-import Banner from "../../components/Banner.astro";
-import ArticleContainer from "../../components/ArticleContainer.astro";
+import Layout from "../../layouts/Page.astro";
 import BigCard from "../../components/extracurriculars/BigCard.astro";
 import SmallCard from "../../components/extracurriculars/SmallCard.astro";
 
@@ -9,20 +7,17 @@ import SmallCard from "../../components/extracurriculars/SmallCard.astro";
 // const top = extras.filter((i) => i.frontmatter.tipe == "top");
 // const other = extras.filter((i) => i.frontmatter.tipe != "top");
 
-import { default as extras } from "./extrakurikuler.ts";
+import { default as extras } from "./extrakurikuler";
 
 const top = extras.filter((i) => i.type == "top");
 const other = extras.filter((i) => i.type != "top");
 ---
 
-<Layout>
-  <Banner text="Ekstrakurikuler" />
-  <ArticleContainer>
-    <div class="grid grid-cols-3 grid-rows-1 gap-3">
-      {top.map(({ name, color, icon }) => <BigCard {name} {color} {icon} />)}
-    </div>
-    <div class="mt-8 grid grid-cols-4 grid-rows-none gap-4">
-      {other.map(({ name, color, icon }) => <SmallCard {name} {color} {icon} />)}
-    </div>
-  </ArticleContainer>
+<Layout bannerTitle="Ekstrakurikuler">
+  <div class="grid grid-cols-3 grid-rows-1 gap-1 lg:gap-3">
+    {top.map(({ name, color, icon }) => <BigCard {name} {color} {icon} />)}
+  </div>
+  <div class="mt-1 grid grid-cols-3 grid-rows-none gap-1 lg:mt-8 lg:grid-cols-4 lg:gap-4">
+    {other.map(({ name, color, icon }) => <SmallCard {name} {color} {icon} />)}
+  </div>
 </Layout>

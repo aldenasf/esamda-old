@@ -1,0 +1,17 @@
+---
+interface Props {
+  bannerTitle: string;
+}
+
+import DefaultLayout from "./Default.astro";
+import Banner from "../components/Banner.astro";
+
+const { bannerTitle } = Astro.props;
+---
+
+<DefaultLayout>
+  <Banner text={bannerTitle} />
+  <div class="container mx-auto mt-8 bg-white p-4 lg:max-w-6xl lg:p-12">
+    <slot />
+  </div>
+</DefaultLayout>
