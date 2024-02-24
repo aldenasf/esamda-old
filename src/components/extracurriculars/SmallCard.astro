@@ -1,0 +1,51 @@
+---
+interface Props {
+  color: string;
+  name: string;
+  icon?: string;
+}
+
+import { Image } from "astro:assets";
+
+const { color, name, icon } = Astro.props;
+
+let iconPath;
+
+// If icon is undefined, use file unknown icon
+if (icon === undefined) {
+  iconPath = "https://www.svgrepo.com/download/332374/file-unknown.svg";
+}
+
+// If icon is a url, use it
+else if (extractDomain(icon) !== null) {
+  iconPath = icon;
+}
+
+// If icon isn't a url, treat is as a local file
+else if (icon !== undefined) {
+  iconPath = extractDomain(Astro.url) + (!icon?.startsWith("/") ? "/" : "") + icon;
+}
+
+function extractDomain(url: string | URL) {
+  const pattern = /^(https?:\/\/[^\/]+)/;
+  const match = pattern.exec(`${url}`);
+
+  return match ? match[1] : null;
+}
+---
+
+<div
+  class="flex min-w-fit cursor-default flex-col flex-wrap items-center rounded-lg bg-zinc-500 p-6 transition-all duration-100 ease-in-out lg:flex-row lg:flex-nowrap"
+  data-hover-color={color}
+  onmouseover="this.style.backgroundColor=this.dataset.hoverColor"
+  onmouseout="this.style.backgroundColor=''"
+>
+  <div class="flex">
+    {iconPath ? <Image src={`${iconPath}`} alt="Icon" height={128} width={128} class="max-h-12 max-w-12" /> : ""}
+  </div>
+  <div class="ml-0 mt-4 flex lg:ml-4 lg:mt-0">
+    <h2 class="text-center text-xl font-medium text-slate-100 lg:text-2xl">
+      {name}
+    </h2>
+  </div>
+</div>

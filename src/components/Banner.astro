@@ -1,0 +1,17 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="relative -z-10">
+  <div class="z-0 justify-center text-center">
+    <h1 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-black text-slate-100">
+      {text}
+    </h1>
+  </div>
+  <!-- <Image src={imageSrc} alt={"Banner"} inferSize={true} class="pointer-events-none -z-10 block h-48" /> -->
+  <div class="relative -z-10 block h-48 bg-slate-900"></div>
+</div>

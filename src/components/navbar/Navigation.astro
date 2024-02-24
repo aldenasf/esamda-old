@@ -1,0 +1,59 @@
+---
+
+---
+
+<div class="z-0 flex h-full lg:ml-auto lg:mt-0">
+  <ul
+    class="px-4:flex-nowrap pointer-events-none absolute left-0 flex w-full list-none flex-col flex-wrap items-center opacity-0 transition-all ease-in-out lg:pointer-events-auto lg:relative lg:flex-row lg:opacity-100"
+    data-navbar-content
+  >
+    <slot />
+  </ul>
+</div>
+
+<script>
+  // Navbar Dropdown Menu
+  const navbarDropdownBtn = document.querySelectorAll("[data-dropdown]");
+
+  // Function to close all dropdowns
+  function closeAllDropdowns() {
+    navbarDropdownBtn.forEach((dropdown) => {
+      const dropdownTarget = dropdown.querySelector("ul");
+      dropdownTarget?.classList.add("hidden");
+      dropdownTarget?.classList.remove("flex");
+    });
+  }
+
+  // If user clicks outside of dropdown, close all dropdown.
+  document.addEventListener("click", (event) => {
+    const isDropdownClick = Array.from(navbarDropdownBtn).some((dropdown) => {
+      const dropdownTarget = dropdown.querySelector("ul");
+      return dropdownTarget && dropdownTarget.contains(event.target as Node);
+    });
+
+    if (!isDropdownClick) {
+      closeAllDropdowns();
+    }
+  });
+
+  navbarDropdownBtn.forEach((el) => {
+    const target = el.querySelector("ul");
+
+    el?.querySelector("p")?.addEventListener("click", (event) => {
+      // Check if the clicked dropdown is already open
+      const isOpen = target?.classList.contains("flex");
+
+      // Close all dropdowns
+      closeAllDropdowns();
+
+      if (!isOpen) {
+        // Toggle the selected dropdown
+        target?.classList.toggle("hidden");
+        target?.classList.toggle("flex");
+
+        // Prevent the document click event from closing this dropdown immediately
+        event.stopPropagation();
+      }
+    });
+  });
+</script>

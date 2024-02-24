@@ -1,0 +1,35 @@
+---
+interface Props {
+  color: string;
+  name: string;
+  icon: string;
+}
+
+import { Image } from "astro:assets";
+
+const { color, name, icon } = Astro.props;
+console.log(Astro.request.url);
+
+function extractDomain(url: string | URL) {
+  const pattern = /^(https?:\/\/[^\/]+)/;
+  const match = pattern.exec(`${url}`);
+
+  return match ? match[1] : null;
+}
+
+const iconPath = extractDomain(Astro.url) + (!icon?.startsWith("/") ? "/" : "") + icon;
+---
+
+<div
+  class="flex min-w-fit cursor-default flex-col flex-wrap items-center rounded-lg p-8 lg:min-h-32 lg:flex-row lg:flex-nowrap"
+  style={`background-color: ${color}`}
+>
+  <div class="flex">
+    <Image src={`${iconPath}`} alt="Icon" height={128} width={128} class="max-h-20 max-w-20" />
+  </div>
+  <div class="mt-4 flex w-full lg:mt-0">
+    <h2 class="w-full text-center text-4xl font-medium text-slate-100">
+      {name}
+    </h2>
+  </div>
+</div>
